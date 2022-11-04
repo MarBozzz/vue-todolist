@@ -4,56 +4,52 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css' integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==' crossorigin='anonymous'/>
   <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://unpkg.com/vue@3"></script>
+
   <title>Vue To Do List</title>
 </head>
 <body>
 
-  <header>
-
-  </header>
+  <header></header>
   
-  <div class="container">
+  <div id="app" class="container">
     <div class="logo">
       <img src="img/logo.png" alt="Logo">
     </div>
     <div class="input-area">
-      <input type="text" placeholder="New Task">
-      <button>Aggiungi</button>
+      <input 
+        @keyup.enter="addTask()"
+        v-model.trim="newMessage"
+        type="text" placeholder="New Task">
+      <button
+        @click="addTask()">Aggiungi</button>
     </div>
+    <p class="error-message">{{errorMessage}}</p>
 
-    <section class="tasks">
-      <ul>
-        <li class="list-item">
-          <span>
-            Andare al mercato
-          </span>
-          <span>
-            <i class="fa-regular fa-trash-can"></i>
-          </span>
-        </li>
-        <li class="list-item">
-          <span>
-            Andare al mercato
-          </span>
-          <span>
-            <i class="fa-regular fa-trash-can"></i>
-          </span>
-        </li>
-        <li class="list-item">
-          <span>
-            Andare al mercato
-          </span>
-          <span>
-            <i class="fa-regular fa-trash-can"></i>
-          </span>
-        </li>
+    <section class="tasks-container">
+      <ul v-if="tasks.length > 0">
         
+        <li 
+        v-for="(task, index) in tasks"
+        :class="{'done': task.done}"
+        @click="task.done = !task.done"
+        class="list-item">
+          <span>
+            {{task.text}}
+          </span>
+          <i 
+            @click.stop="removeTask(index)"
+            class="fa-regular fa-trash-can"></i>
+        </li>
+
       </ul>
+      <h2 v-else>Non ci sono Task &#128526;</h2>
     </section>
   </div>
-
 
 
   <script src="js/script.js"></script>

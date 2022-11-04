@@ -46,6 +46,7 @@ header {
   border-radius: 25px;
   width: 200px;
   height: 100%;
+  padding-left: 15px;
 }
 
 .input-area button{
@@ -54,12 +55,17 @@ header {
   cursor: pointer;
 }
 
-.tasks {
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.tasks-container {
   background-color: #F5F5F5;
   width: 60%;
 }
 
-.tasks ul {
+.tasks-container ul {
   padding: 50px;
 }
 
@@ -76,6 +82,10 @@ header {
  background-color: white;
 }
 
-.list-item span:hover {
+.list-item span:hover, .list-item i:hover {
   cursor: pointer;
+}
+
+.list-item.done span{
+  text-decoration: line-through;
 }
